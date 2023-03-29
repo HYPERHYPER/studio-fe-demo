@@ -21,7 +21,7 @@ const App = () => {
   return (
     <Router>
         <Switch>
-          <Route exact path="/connect/discord/redirect" component={LoginRedirect} />
+          <Route exact path="/connect/capsule/redirect" component={LoginRedirect} />
           <Route exact path="/" component={Home} />
         </Switch>
     </Router>

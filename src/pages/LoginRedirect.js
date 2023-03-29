@@ -16,7 +16,7 @@ const LoginRedirect = (props) => {
     // Successfully logged with the provider
     // Now logging with strapi by using the access_token (given by the provider) in props.location.search
 
-    const url = `${backendUrl}/api/auth/discord/callback${location.search}`
+    const url = `${backendUrl}/api/auth/capsule/callback${location.search}`
 
     console.log(url)
     fetch(url)
