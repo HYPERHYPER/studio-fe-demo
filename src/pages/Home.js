@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
+import FetchMgmt from '../components/FetchMgmt';
+import UpdateUserButton from '../components/UpdateUserButton';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const providersNames = [
   'capsule',
-  'email',
-  'github',
-  'discord'
 ];
 
 const LoginButton = (props) => <a href={`${backendUrl}/api/connect/${props.providerName}`}>
@@ -41,14 +40,22 @@ const Home = (props) => {
 
   if (isLogged) {
     text = `Welcome ${localStorage.getItem('username')}, you are connected!`;
+
+    return <div>
+      <p>{text}</p>
+      {buttons}
+      <FetchMgmt/>
+      <UpdateUserButton/>
+    </div>;
   } else {
     text = 'You are not connected. Please log in.';
+
+    return <div>
+      <p>{text}</p>
+      {buttons}
+    </div>;
   }
 
-  return <div>
-    <p>{text}</p>
-    {buttons}
-  </div>;
 }
 
 export default Home;

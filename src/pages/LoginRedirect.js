@@ -18,7 +18,12 @@ const LoginRedirect = (props) => {
 
     const url = `${backendUrl}/api/auth/capsule/callback${location.search}`
 
-    console.log(url)
+    // store capsule access token to local storage 
+    const urlParams = new URLSearchParams(location.search);
+    const accessToken = urlParams.get('access_token');
+    
+
+
     fetch(url)
       .then(res => {
         if (res.status !== 200) {
@@ -30,8 +35,13 @@ const LoginRedirect = (props) => {
       .then(res => {
         // Successfully logged with Strapi
         // Now saving the jwt to use it for future authenticated requests to Strapi
+
+        console.log(accessToken);
+
         localStorage.setItem('jwt', res.jwt);
+        localStorage.setItem('id', res.user.id);
         localStorage.setItem('username', res.user.username);
+        localStorage.setItem('accessToken', accessToken);
         setText('You have been successfully logged in. You will be redirected in a few seconds...');
         setTimeout(() => history.push('/'), 3000); // Redirect to homepage after 3 sec
       })
