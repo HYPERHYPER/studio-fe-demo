@@ -1,5 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 8px;
+
+  p {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  p:first-child {
+    font-weight: bold;
+  }
+`;
+
 
 function FetchMgmt() {
     const [orgId, setOrgId] = useState('');
@@ -39,19 +61,13 @@ function FetchMgmt() {
     };
 
     return (
-        <div>
-            <div className='org'>
-                <p>org id: {orgId}</p>
-                <p>org name: {orgName}</p>
-                <p>capsule plan: {orgPlan}</p>
-            </div>
-
-            <div className='user'>
-                <p>first name: {firstName}</p>
-                <p>last name: {lastName}</p>
-            </div>
-            
-        </div>
+        <Container>
+            <p>Organization: {orgId}</p>
+            <p>Name: {orgName}</p>
+            <p>Capsule Plan: {orgPlan}</p>
+            <p>First Name: {firstName}</p>
+            <p>Last Name: {lastName}</p>
+        </Container>
     );
 }
 

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import LoginRedirect from './pages/LoginRedirect';
+import ProjectList from './pages/ProjectList';
 
 const App = () => {
   if (!process.env.REACT_APP_BACKEND_URL) {
@@ -23,6 +24,7 @@ const App = () => {
         <Switch>
           <Route exact path="/connect/capsule/redirect" component={LoginRedirect} />
           <Route exact path="/" component={Home} />
+        <Route exact path="/projects" component={ProjectList} />
         </Switch>
     </Router>
   );

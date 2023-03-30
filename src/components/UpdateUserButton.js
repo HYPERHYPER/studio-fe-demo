@@ -5,7 +5,20 @@ const UpdateUserButton = () => {
 
     const [successMessage, setSuccessMessage] = useState('');
 
+
+    const buttonStyles = {
+        padding: '10px 20px',
+        background: 'tomato',
+        color: 'white',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        fontSize: '1.2rem',
+        marginRight: '10px'
+    };
+
     const handleUpdateUser = async () => {
+
 
        
 
@@ -45,9 +58,10 @@ const UpdateUserButton = () => {
     };
 
     return (
+        
 
         <div>
-            <button onClick={handleUpdateUser}>Update details in strapi</button>
+            <button style={buttonStyles} onClick={handleUpdateUser}>Strapi Update</button>
             {successMessage && <p>{successMessage}</p>}
         </div>
     );

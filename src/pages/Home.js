@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import FetchMgmt from '../components/FetchMgmt';
 import UpdateUserButton from '../components/UpdateUserButton';
+import { Link } from 'react-router-dom';
+
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -58,13 +60,10 @@ const pageSubTitleStyles = {
   marginBottom: '20px'
 };
 
-const LoginButton = (props) => <a href={`${backendUrl}/api/connect/${props.providerName}`}>
-  <button style={buttonStyles}>Connect using {props.providerName}</button>
+const LoginButton = (props) => <a href={`${backendUrl}/api/connect/capsule`}>
+  <button style={buttonStyles}>Connect using Capsule</button>
   </a>;
-const LogoutButton = (props) => <button onClick={props.onClick}>Logout</button>;
-
-
-
+const LogoutButton = (props) => <button style={buttonStyles} onClick={props.onClick}>Logout</button>;
 
 
 
@@ -81,35 +80,26 @@ const Home = (props) => {
     setIsLogged(false);
   };
 
-  let buttons;
-
-  if (isLogged) {
-    buttons = <LogoutButton onClick={logout} />;
-  } else {
-    buttons = <ul style={{ listStyleType: 'none' }}>
-      {providersNames.map((providerName, i) => <li key={providerName}>
-        <LoginButton providerName={providerName}/>
-        </li>)}
-    </ul>;
-  }
 
   let text;
 
   if (isLogged) {
-    text = `Welcome ${localStorage.getItem('username')}, you are connected!`;
+    text = `Welcome ${localStorage.getItem('username')}, you are connected to studio!`;
 
     return <div style={containerStyles}>
       <h1 style={pageTitleStyles}></h1>
       <p style={pageSubTitleStyles}>{text}</p>
 
       <div style={navStyles}>
-        <button style={buttonStyles}>Home</button>
-        <button style={buttonStyles}>About</button>
+        <Link to="/projects">
+          <button style={buttonStyles}>Personal Projects</button>
+        </Link>
+        <Link to="/orgProjects">
+          <button style={buttonStyles}>Org Projects</button>
+        </Link>
+        <LogoutButton onClick={logout} />
       </div>
 
-       <div style={buttonContainerStyles}>
-          {buttons}
-      </div>
       <FetchMgmt/>
       <UpdateUserButton/>
     </div>;
@@ -121,7 +111,7 @@ const Home = (props) => {
       <p style={pageSubTitleStyles}>{text}</p>
 
       <div style={buttonContainerStyles}>
-        {buttons}
+        <LoginButton providerName={'capsule'} />
       </div>
     </div>;
   }
