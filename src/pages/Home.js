@@ -86,15 +86,18 @@ const Home = (props) => {
   if (isLogged) {
     text = `Welcome ${localStorage.getItem('username')}, you are connected to studio!`;
 
+    const orgPath = 'projects-org';
+
+
+
     return <div style={containerStyles}>
-      <h1 style={pageTitleStyles}></h1>
       <p style={pageSubTitleStyles}>{text}</p>
 
       <div style={navStyles}>
-        <Link to="/projects">
-          <button style={buttonStyles}>Personal Projects</button>
+        <Link to={{ pathname: "/projects", state: {} }} >
+          <button style={buttonStyles}>Projects</button>
         </Link>
-        <Link to="/orgProjects">
+        <Link to={{ pathname: "/projects", state: { orgPath } }} >
           <button style={buttonStyles}>Org Projects</button>
         </Link>
         <LogoutButton onClick={logout} />

@@ -43,8 +43,9 @@ const ProjectItemStyle = styled.li`
 
 `;
 
-function ProjectList() {
+function ProjectList(props) {
     const [projects, setProjects] = useState([]);
+    const { orgPath } = props.location.state;
     
 
     useEffect(() => {
@@ -53,15 +54,14 @@ function ProjectList() {
 
 
     async function fetchProjects() {
+        const path = orgPath ? orgPath : 'projects';
         const token = localStorage.getItem('jwt'); 
-        const response = await axios.get('http://localhost:1337/api/projects', {
+        const response = await axios.get(`http://localhost:1337/api/${path}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        console.log(response.data.data);
-        setProjects(response.data.data);
+        setProjects(response.data);
     }
 
 
@@ -70,7 +70,10 @@ function ProjectList() {
             <ProjectListHeaderStyle>Projects</ProjectListHeaderStyle>
             <ProjectListStyle>
                 {projects.map(project => (
-                    <ProjectItemStyle key={project.id}>{project.attributes.name}</ProjectItemStyle>
+                    <ProjectItemStyle key={project.id}>
+                        {project.name}
+                    </ProjectItemStyle>
+                    
                 ))}
             </ProjectListStyle>
             <Link to="/">
