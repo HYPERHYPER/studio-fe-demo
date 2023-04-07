@@ -54,9 +54,10 @@ function ProjectList(props) {
 
 
     async function fetchProjects() {
+        const backendUrl = process.env.REACT_APP_BACKEND_URL;
         const path = orgPath ? orgPath : 'projects';
         const token = localStorage.getItem('jwt'); 
-        const response = await axios.get(`http://localhost:1337/api/${path}`, {
+        const response = await axios.get(`${backendUrl}/api/${path}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
