@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import FetchMgmt from '../components/FetchMgmt';
-import UpdateUserButton from '../components/UpdateUserButton';
 import { Link } from 'react-router-dom';
+
 
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
@@ -53,17 +52,13 @@ const pageTitleStyles = {
   marginBottom: '20px'
 };
 
-const pageSubTitleStyles = {
-  fontSize: '1rem',
-  fontWeight: 'bold',
-  color: 'whitg',
-  marginBottom: '20px'
-};
 
 const LoginButton = (props) => <a href={`${backendUrl}/api/connect/capsule`}>
   <button style={buttonStyles}>Connect using Capsule</button>
   </a>;
 const LogoutButton = (props) => <button style={buttonStyles} onClick={props.onClick}>Logout</button>;
+
+const Emoji = (props) => <span style={{ fontSize: '100px' }} rrole="img" aria-label="heart">👋</span>
 
 
 
@@ -80,20 +75,30 @@ const Home = (props) => {
     setIsLogged(false);
   };
 
+  const handleStrapiBackend = (e) => {
+    window.alert('Ask Bibek for Backend admin login!');
+    window.open('https://studio-strapi-api.herokuapp.com/admin', '_blank') 
+  }
+
+  const handleStrapiDocs = (e) => {
+    window.open('https://docs.strapi.io', '_blank')
+  }
+
 
   let text;
 
   if (isLogged) {
-    text = `Welcome ${localStorage.getItem('username')}, you are connected to studio!`;
+    text = `Hello ${localStorage.getItem('username')}, you are connected to studio!`;
 
     const orgPath = 'projects-org';
 
-
-
     return <div style={containerStyles}>
-      <p style={pageSubTitleStyles}>{text}</p>
+      <p style={pageTitleStyles}>{text}</p>
+      <Emoji />
 
       <div style={navStyles}>
+        <button onClick={handleStrapiBackend} style={buttonStyles}>Strapi Backend</button>
+        <button onClick={handleStrapiDocs} style={buttonStyles}>Strapi Docs</button>
         <Link to={{ pathname: "/projects", state: {} }} >
           <button style={buttonStyles}>Projects</button>
         </Link>
@@ -102,16 +107,13 @@ const Home = (props) => {
         </Link>
         <LogoutButton onClick={logout} />
       </div>
-
-      <FetchMgmt/>
-      <UpdateUserButton/>
     </div>;
   } else {
     text = 'You are not connected. Please log in.';
 
     return <div style={containerStyles}>
       <h1 style={pageTitleStyles}>Studio</h1>
-      <p style={pageSubTitleStyles}>{text}</p>
+      <p style={pageTitleStyles}>{text}</p>
 
       <div style={buttonContainerStyles}>
         <LoginButton providerName={'capsule'} />
