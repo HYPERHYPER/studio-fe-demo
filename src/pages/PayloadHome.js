@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from "react-router-dom";
 
 
 
@@ -48,6 +48,13 @@ const pageTitleStyles = {
     marginBottom: '20px'
 };
 
+const pageSubTitleStyles = {
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: '20px'
+};
+
 
 const LoginButton = (props) => <a href={`${backendUrl}/api/connect/capsule`}>
     <button style={buttonStyles}>Connect using Capsule</button>
@@ -58,8 +65,9 @@ const Emoji = (props) => <span style={{ fontSize: '100px' }} rrole="img" aria-la
 
 
 
-
 const PayloadHome = (props) => {
+
+    const history = useHistory();
 
     console.log(props);
 
@@ -72,16 +80,19 @@ const PayloadHome = (props) => {
         e.preventDefault();
         localStorage.removeItem('payload_jwt');
         localStorage.removeItem('payload_username');
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('username');
         setIsLogged(false);
+        history.push('/');
     };
 
-    const handleStrapiBackend = (e) => {
+    const handlePayloadBackend = (e) => {
         window.alert('Ask Bibek for Backend admin login!');
-        window.open('https://studio-strapi-api.herokuapp.com/admin', '_blank')
+        window.open('https://studio-api-payload.herokuapp.com/admin', '_blank')
     }
 
-    const handleStrapiDocs = (e) => {
-        window.open('https://docs.strapi.io', '_blank')
+    const handlePayloadDocs = (e) => {
+        window.open('https://payloadcms.com/docs/getting-started/what-is-payload', '_blank')
     }
 
 
@@ -93,8 +104,19 @@ const PayloadHome = (props) => {
         const orgPath = 'projects-org';
 
         return <div style={containerStyles}>
-            <p style={pageTitleStyles}>{text}</p>
+            <p style={pageSubTitleStyles}>{text}</p>
             <Emoji />
+            <div style={navStyles}>
+                <button onClick={handlePayloadBackend} style={buttonStyles}>Payload Backend</button>
+                <button onClick={handlePayloadDocs} style={buttonStyles}>Payload Docs</button>
+                <Link to={{ pathname: "/projects", state: {} }} >
+                    <button style={buttonStyles}>Projects</button>
+                </Link>
+                <Link to={{ pathname: "/projects", state: { orgPath } }} >
+                    <button style={buttonStyles}>Org Projects</button>
+                </Link>
+                <LogoutButton onClick={logout} />
+            </div>
         </div>;
     } else {
         text = 'You are not connected. Please log in.';

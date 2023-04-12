@@ -72,8 +72,6 @@ const LogoutButton = (props) => <button style={buttonStyles} onClick={props.onCl
 const Emoji = (props) => <span style={{ fontSize: '100px' }} rrole="img" aria-label="heart">👋</span>
 
 
-
-
 const Home = (props) => {
 
   const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
@@ -83,7 +81,10 @@ const Home = (props) => {
     e.preventDefault();
     localStorage.removeItem('jwt');
     localStorage.removeItem('username');
+    localStorage.removeItem('payload_jwt');
+    localStorage.removeItem('payload_username');
     setIsLogged(false);
+    history.push('/');
   };
 
   const handleStrapiBackend = (e) => {
@@ -104,7 +105,7 @@ const Home = (props) => {
     const orgPath = 'projects-org';
 
     return <div style={containerStyles}>
-      <p style={pageTitleStyles}>{text}</p>
+      <p style={pageSubTitleStyles}>{text}</p>
       <Emoji />
 
       <div style={navStyles}>
