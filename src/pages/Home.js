@@ -50,6 +50,13 @@ const pageTitleStyles = {
   marginBottom: '20px'
 };
 
+const pageSubTitleStyles = {
+  fontSize: '1rem',
+  fontWeight: 'bold',
+  color: 'white',
+  marginBottom: '20px'
+};
+
 
 const StrapiLoginButton = (props) => <a href={`${backendUrl}/api/connect/capsule`}>
   <button style={buttonStyles}>STRAPI</button>
@@ -113,11 +120,11 @@ const Home = (props) => {
       </div>
     </div>;
   } else {
-    text = 'You are not connected. Please log in.';
+    text = 'Not connected.';
 
     return <div style={containerStyles}>
       <h1 style={pageTitleStyles}>Studio Frontend</h1>
-      <p style={pageTitleStyles}>{text}</p>
+      <p style={pageSubTitleStyles}>{text}</p>
 
       <div style={buttonContainerStyles}>
         <StrapiLoginButton/>
