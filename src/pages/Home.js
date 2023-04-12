@@ -5,9 +5,6 @@ import { Link } from 'react-router-dom';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-const providersNames = [
-  'capsule',
-];
 
 const buttonStyles = {
   padding: '10px 20px',
@@ -88,7 +85,7 @@ const Home = (props) => {
   let text;
 
   if (isLogged) {
-    text = `Hello ${localStorage.getItem('username')}, you are connected to studio!`;
+    text = `Hello ${localStorage.getItem('username')}, you are connected to  strapi studio!`;
 
     const orgPath = 'projects-org';
 
