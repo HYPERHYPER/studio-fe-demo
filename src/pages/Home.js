@@ -112,12 +112,13 @@ const Home = (props) => {
         <button onClick={handleStrapiBackend} style={buttonStyles}>Strapi Backend</button>
         <button onClick={handleStrapiDocs} style={buttonStyles}>Strapi Docs</button>
         <Link to={{ pathname: "/projects", state: {} }} >
-          <button style={buttonStyles}>Projects</button>
+          <button style={buttonStyles}>Strapi Projects</button>
         </Link>
         <Link to={{ pathname: "/projects", state: { orgPath } }} >
           <button style={buttonStyles}>Org Projects</button>
         </Link>
         <LogoutButton onClick={logout} />
+        <p style={pageSubTitleStyles}>Powered by Strapi </p>
       </div>
     </div>;
   } else {

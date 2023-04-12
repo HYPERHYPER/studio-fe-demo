@@ -101,7 +101,7 @@ const PayloadHome = (props) => {
     if (isLogged) {
         text = `Hello ${localStorage.getItem('payload_username')}, you are connected to Payload studio!`;
 
-        const orgPath = 'projects-org';
+        const orgPath = 'projects?org=true';
 
         return <div style={containerStyles}>
             <p style={pageSubTitleStyles}>{text}</p>
@@ -109,14 +109,15 @@ const PayloadHome = (props) => {
             <div style={navStyles}>
                 <button onClick={handlePayloadBackend} style={buttonStyles}>Payload Backend</button>
                 <button onClick={handlePayloadDocs} style={buttonStyles}>Payload Docs</button>
-                <Link to={{ pathname: "/projects", state: {} }} >
+                <Link to={{ pathname: "/payload/projects", state: {} }} >
                     <button style={buttonStyles}>Projects</button>
                 </Link>
-                <Link to={{ pathname: "/projects", state: { orgPath } }} >
+                <Link to={{ pathname: "/payload/projects", state: { orgPath } }} >
                     <button style={buttonStyles}>Org Projects</button>
                 </Link>
                 <LogoutButton onClick={logout} />
             </div>
+            <p style={pageSubTitleStyles}>Powered by Payload </p>
         </div>;
     } else {
         text = 'You are not connected. Please log in.';

@@ -43,10 +43,10 @@ const ProjectItemStyle = styled.li`
 
 `;
 
-function ProjectList(props) {
+function PayloadProjectList(props) {
     const [projects, setProjects] = useState([]);
     const { orgPath } = props.location.state;
-    
+
 
     useEffect(() => {
         fetchProjects();
@@ -54,34 +54,35 @@ function ProjectList(props) {
 
 
     async function fetchProjects() {
-        const backendUrl = process.env.REACT_APP_BACKEND_URL;
+        const backendUrl = process.env.REACT_APP_PAYLOAD_BACKEND_URL;
         const path = orgPath ? orgPath : 'projects';
-        const token = localStorage.getItem('jwt'); 
+        const token = localStorage.getItem('payload_jwt');
         const response = await axios.get(`${backendUrl}/api/${path}`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `JWT ${token}`
             }
         });
-        setProjects(response.data);
+
+        setProjects(response.data.docs);
     }
 
 
     return (
         <ProjectListContainerStyle>
-            <ProjectListHeaderStyle>Strapi Projects</ProjectListHeaderStyle>
+            <ProjectListHeaderStyle>Payload Projects</ProjectListHeaderStyle>
             <ProjectListStyle>
                 {projects.map(project => (
                     <ProjectItemStyle key={project.id}>
                         {project.name}
                     </ProjectItemStyle>
-                    
+
                 ))}
             </ProjectListStyle>
-            <Link to="/">
+            <Link to="/payload">
                 <ButtonStyle>Home</ButtonStyle>
             </Link>
         </ProjectListContainerStyle>
     );
 }
 
-export default ProjectList;
+export default PayloadProjectList;

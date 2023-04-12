@@ -9,6 +9,7 @@ import PayloadHome from './pages/PayloadHome';
 import LoginRedirect from './pages/LoginRedirect';
 import PayloadRedirect from './pages/PayloadRedirect';
 import ProjectList from './pages/ProjectList';
+import PayloadProjectList from './pages/PayloadProjectList';
 
 const App = () => {
   if (!process.env.REACT_APP_BACKEND_URL) {
@@ -29,6 +30,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/payload" component={PayloadHome} />
           <Route exact path="/projects" component={ProjectList} />
+          <Route exact path="/payload/projects" component={PayloadProjectList} />
         </Switch>
     </Router>
   );
