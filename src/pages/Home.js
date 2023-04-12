@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from "react-router-dom";
 
 
 
@@ -73,7 +73,7 @@ const Emoji = (props) => <span style={{ fontSize: '100px' }} rrole="img" aria-la
 
 
 const Home = (props) => {
-
+  const history = useHistory();
   const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
 
 
