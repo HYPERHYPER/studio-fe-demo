@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const payloadBackendUrl = process.env.REACT_APP_PAYLOAD_BACKEND_URL;
 
 
 const buttonStyles = {
@@ -50,9 +51,15 @@ const pageTitleStyles = {
 };
 
 
-const LoginButton = (props) => <a href={`${backendUrl}/api/connect/capsule`}>
-  <button style={buttonStyles}>Connect using Capsule</button>
+const StrapiLoginButton = (props) => <a href={`${backendUrl}/api/connect/capsule`}>
+  <button style={buttonStyles}>STRAPI</button>
   </a>;
+
+const PayloadLoginButton = (props) => <a href={`${payloadBackendUrl}/oauth2/authorize`}>
+  <button style={buttonStyles}>PAYLOAD</button>
+</a>;
+
+
 const LogoutButton = (props) => <button style={buttonStyles} onClick={props.onClick}>Logout</button>;
 
 const Emoji = (props) => <span style={{ fontSize: '100px' }} rrole="img" aria-label="heart">👋</span>
@@ -109,11 +116,14 @@ const Home = (props) => {
     text = 'You are not connected. Please log in.';
 
     return <div style={containerStyles}>
-      <h1 style={pageTitleStyles}>Studio</h1>
+      <h1 style={pageTitleStyles}>Studio Frontend</h1>
       <p style={pageTitleStyles}>{text}</p>
 
       <div style={buttonContainerStyles}>
-        <LoginButton providerName={'capsule'} />
+        <StrapiLoginButton/>
+      </div>
+      <div style={buttonContainerStyles}>
+        <PayloadLoginButton/>
       </div>
     </div>;
   }
