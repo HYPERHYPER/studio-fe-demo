@@ -44,7 +44,7 @@ const LoginRedirect = (props) => {
         localStorage.setItem('username', res.user.username);
         localStorage.setItem('accessToken', accessToken);
         setText('You have been successfully logged in studio. You will be redirected in a few seconds...');
-        setTimeout(() => history.push('/payload'), 3000); // Redirect to homepage after 3 sec
+        setTimeout(() => history.push('/'), 3000); // Redirect to homepage after 3 sec
       })
       .catch(err => {
         console.log(err);
