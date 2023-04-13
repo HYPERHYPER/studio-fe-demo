@@ -15,7 +15,8 @@ const buttonStyles = {
   borderRadius: '5px',
   cursor: 'pointer',
   fontSize: '1.2rem',
-  marginRight: '10px'
+  marginRight: '10px',
+  width: '150px'
 };
 
 const buttonContainerStyles = {
@@ -109,17 +110,20 @@ const Home = (props) => {
       <Emoji />
 
       <div style={navStyles}>
-        <button onClick={handleStrapiBackend} style={buttonStyles}>Strapi Backend</button>
-        <button onClick={handleStrapiDocs} style={buttonStyles}>Strapi Docs</button>
+        <button onClick={handleStrapiBackend} style={buttonStyles}>Backend</button>
+        <button onClick={handleStrapiDocs} style={buttonStyles}>Docs</button>
         <Link to={{ pathname: "/projects", state: {} }} >
-          <button style={buttonStyles}>Strapi Projects</button>
+          <button style={buttonStyles}>Projects</button>
         </Link>
         <Link to={{ pathname: "/projects", state: { orgPath } }} >
           <button style={buttonStyles}>Org Projects</button>
         </Link>
+        <Link to={{ pathname: "/strapi/routes", state: { orgPath } }} >
+          <button style={buttonStyles}>Routes</button>
+        </Link>
         <LogoutButton onClick={logout} />
-        <p style={pageSubTitleStyles}>Powered by Strapi </p>
       </div>
+        <p style={pageSubTitleStyles}>Powered by Strapi </p>
     </div>;
   } else {
     text = 'Not connected.';

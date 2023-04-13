@@ -13,7 +13,8 @@ const buttonStyles = {
     borderRadius: '5px',
     cursor: 'pointer',
     fontSize: '1.2rem',
-    marginRight: '10px'
+    marginRight: '10px',
+    width: '150px'
 };
 
 const buttonContainerStyles = {
@@ -107,8 +108,8 @@ const PayloadHome = (props) => {
             <p style={pageSubTitleStyles}>{text}</p>
             <Emoji />
             <div style={navStyles}>
-                <button onClick={handlePayloadBackend} style={buttonStyles}>Payload Backend</button>
-                <button onClick={handlePayloadDocs} style={buttonStyles}>Payload Docs</button>
+                <button onClick={handlePayloadBackend} style={buttonStyles}>Backend</button>
+                <button onClick={handlePayloadDocs} style={buttonStyles}>Docs</button>
                 <Link to={{ pathname: "/payload/projects", state: {} }} >
                     <button style={buttonStyles}>Projects</button>
                 </Link>

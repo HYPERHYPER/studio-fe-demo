@@ -5,6 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import Home from './pages/Home';
+import StrapiRouteList from './pages/StrapiRouteList';
 import PayloadHome from './pages/PayloadHome';
 import LoginRedirect from './pages/LoginRedirect';
 import PayloadRedirect from './pages/PayloadRedirect';
@@ -26,6 +27,7 @@ const App = () => {
     <Router>
         <Switch>
           <Route exact path="/connect/capsule/redirect" component={LoginRedirect} />
+          <Route exact path="/strapi/routes" component={StrapiRouteList} />
           <Route exact path="/payload/redirect" component={PayloadRedirect} />
           <Route exact path="/" component={Home} />
           <Route exact path="/payload" component={PayloadHome} />

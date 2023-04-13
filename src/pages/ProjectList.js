@@ -35,13 +35,6 @@ const ButtonStyle = styled.button`
     marginRight: 10px;
 `;
 
-const ProjectListStyle = styled.ul`
-
-`;
-
-const ProjectItemStyle = styled.li`
-
-`;
 
 function ProjectList(props) {
     const [projects, setProjects] = useState([]);
@@ -63,20 +56,40 @@ function ProjectList(props) {
             }
         });
         setProjects(response.data);
+        console.log(response.data);
     }
 
 
     return (
         <ProjectListContainerStyle>
             <ProjectListHeaderStyle>Strapi Projects</ProjectListHeaderStyle>
-            <ProjectListStyle>
-                {projects.map(project => (
-                    <ProjectItemStyle key={project.id}>
-                        {project.name}
-                    </ProjectItemStyle>
-                    
-                ))}
-            </ProjectListStyle>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Org ID</th>
+                        <th>Submission</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                        {projects.map(project => (
+                            <tr key={project.id}>
+                                <td>{project.id}</td>
+                                <td>{project.org_id}</td>
+                                <td>{JSON.stringify(project.composition)}</td>
+                            </tr>
+                        ))}
+                </tbody>
+            </table>
+      
+
+
+
+
+
+
+
             <Link to="/">
                 <ButtonStyle>Home</ButtonStyle>
             </Link>
