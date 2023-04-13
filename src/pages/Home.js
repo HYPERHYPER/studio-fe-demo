@@ -96,6 +96,9 @@ const Home = (props) => {
   const handleStrapiDocs = (e) => {
     window.open('https://docs.strapi.io', '_blank')
   }
+  const handleSwagger = (e) => {
+    window.open(`${backendUrl}/documentation`, '_blank')
+  }
 
 
   let text;
@@ -118,12 +121,10 @@ const Home = (props) => {
         <Link to={{ pathname: "/projects", state: { orgPath } }} >
           <button style={buttonStyles}>Org Projects</button>
         </Link>
-        <Link to={{ pathname: "/strapi/routes", state: { orgPath } }} >
-          <button style={buttonStyles}>Routes</button>
-        </Link>
+        <button onClick={handleSwagger} style={buttonStyles}>Swagger</button>
         <LogoutButton onClick={logout} />
       </div>
-        <p style={pageSubTitleStyles}>Powered by Strapi </p>
+      <p style={pageSubTitleStyles}>Powered by Strapi </p>
     </div>;
   } else {
     text = 'Not connected.';
