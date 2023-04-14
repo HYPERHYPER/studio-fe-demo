@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import FetchMgmt from '../components/FetchMgmt';
-import UpdateUserButton from '../components/UpdateUserButton';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from "react-router-dom";
+
 
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const payloadBackendUrl = process.env.REACT_APP_PAYLOAD_BACKEND_URL;
 
-const providersNames = [
-  'capsule',
-];
 
 const buttonStyles = {
   padding: '10px 20px',
@@ -18,7 +15,8 @@ const buttonStyles = {
   borderRadius: '5px',
   cursor: 'pointer',
   fontSize: '1.2rem',
-  marginRight: '10px'
+  marginRight: '10px',
+  width: '150px'
 };
 
 const buttonContainerStyles = {
@@ -56,20 +54,27 @@ const pageTitleStyles = {
 const pageSubTitleStyles = {
   fontSize: '1rem',
   fontWeight: 'bold',
-  color: 'whitg',
+  color: 'white',
   marginBottom: '20px'
 };
 
-const LoginButton = (props) => <a href={`${backendUrl}/api/connect/capsule`}>
-  <button style={buttonStyles}>Connect using Capsule</button>
+
+const StrapiLoginButton = (props) => <a href={`${backendUrl}/api/connect/capsule`}>
+  <button style={buttonStyles}>STRAPI</button>
   </a>;
+
+const PayloadLoginButton = (props) => <a href={`${payloadBackendUrl}/oauth2/authorize`}>
+  <button style={buttonStyles}>PAYLOAD</button>
+</a>;
+
+
 const LogoutButton = (props) => <button style={buttonStyles} onClick={props.onClick}>Logout</button>;
 
-
+const Emoji = (props) => <span style={{ fontSize: '100px' }} rrole="img" aria-label="heart">👋</span>
 
 
 const Home = (props) => {
-
+  const history = useHistory();
   const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
 
 
@@ -77,44 +82,62 @@ const Home = (props) => {
     e.preventDefault();
     localStorage.removeItem('jwt');
     localStorage.removeItem('username');
+    localStorage.removeItem('payload_jwt');
+    localStorage.removeItem('payload_username');
     setIsLogged(false);
+    history.push('/');
   };
+
+  const handleStrapiBackend = (e) => {
+    window.alert('Ask Bibek for Backend admin login!');
+    window.open('https://studio-strapi-api.herokuapp.com/admin', '_blank') 
+  }
+
+  const handleStrapiDocs = (e) => {
+    window.open('https://docs.strapi.io', '_blank')
+  }
+  const handleSwagger = (e) => {
+    window.open(`${backendUrl}/documentation`, '_blank')
+  }
 
 
   let text;
 
   if (isLogged) {
-    text = `Welcome ${localStorage.getItem('username')}, you are connected to studio!`;
+    text = `Hello ${localStorage.getItem('username')}, you are connected to  strapi studio!`;
 
     const orgPath = 'projects-org';
 
-
-
     return <div style={containerStyles}>
       <p style={pageSubTitleStyles}>{text}</p>
+      <Emoji />
 
       <div style={navStyles}>
+        <button onClick={handleStrapiBackend} style={buttonStyles}>Backend</button>
+        <button onClick={handleStrapiDocs} style={buttonStyles}>Docs</button>
         <Link to={{ pathname: "/projects", state: {} }} >
           <button style={buttonStyles}>Projects</button>
         </Link>
         <Link to={{ pathname: "/projects", state: { orgPath } }} >
           <button style={buttonStyles}>Org Projects</button>
         </Link>
+        <button onClick={handleSwagger} style={buttonStyles}>Swagger</button>
         <LogoutButton onClick={logout} />
       </div>
-
-      <FetchMgmt/>
-      <UpdateUserButton/>
+      <p style={pageSubTitleStyles}>Powered by Strapi </p>
     </div>;
   } else {
-    text = 'You are not connected. Please log in.';
+    text = 'Not connected.';
 
     return <div style={containerStyles}>
-      <h1 style={pageTitleStyles}>Studio</h1>
+      <h1 style={pageTitleStyles}>Studio Frontend</h1>
       <p style={pageSubTitleStyles}>{text}</p>
 
       <div style={buttonContainerStyles}>
-        <LoginButton providerName={'capsule'} />
+        <StrapiLoginButton/>
+      </div>
+      <div style={buttonContainerStyles}>
+        <PayloadLoginButton/>
       </div>
     </div>;
   }
